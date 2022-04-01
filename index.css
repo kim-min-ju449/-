@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'CBNUJIKJI';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/CBNUJIKJI.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family:'CBNUJIKJI';
+    background-color:rgb(188, 255, 233);
+    font-size: 20px;
+}
+input{
+    height:30px;
+    width:250px;
+    margin:5px;    
+}
+.btn{
+    background-color:aliceblue;
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+}
+.container{
+    margin-left:40%;    
+}
+.end{
+    margin-left:40%;
+}
