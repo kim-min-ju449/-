@@ -6,23 +6,40 @@
 }
 body{
     font-family:'CBNUJIKJI';
-    background-color:rgb(188, 255, 233);
+    background-color:rgb(195, 255, 235);
     font-size: 20px;
 }
 input{
     height:30px;
     width:250px;
-    margin:5px;    
+    margin:5px;  
+    
 }
 .btn{
     background-color:aliceblue;
-    border-radius: 50%;
+    border-radius: 20%;
     width: 100px;
     height: 50px;
 }
 .container{
-    margin-left:40%;    
-}
+    margin-left:10%;
+} 
 .end{
+    margin-left:10%;
+}
+
+input:focus {
+    border:none;
+    border: 1px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+.wrapper
+{
+    width:30%;
+    height:50%;
+    background-color: rgb(255, 255, 255);
+    margin-top:10%;
     margin-left:40%;
+    border-radius: 10%;
+    box-shadow: 20px 20px 20px grey;
 }
