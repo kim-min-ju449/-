@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,16 +13,16 @@
     <div class="container">    
         <span>암호키</span>
         <input type="text" id="key"><br>
-        <span>암호문</span>
+        <span>평문</span>
         <input type="text" id="str"><br>
         <button onclick="mirim()" class="btn">암호화하기</button>
-        <span>배열</span> <br>
+        <button onclick="bokho()" class="btn b">복호화하기</button><br>
+        <span>암호판</span> <br>
         <div id="arr1"></div> <br>
     </div>
 
     <div class="end">   
-        <span>배열</span> <br>
-        <div id="arr1"></div> <br>
+
         <span>암호문</span>
         <input type="text" id="encryption" readonly> <br>
         <span>복호문</span>
@@ -32,25 +31,28 @@
     </div>
 </div>
     <script>
-        var key = document.getElementById("key"); // 암호화에 쓰일 키
-        var str = document.getElementById("str"); // 암호화할 문자열
-        var arr = document.getElementById("arr1"); // 암호화할 문자열
-        var enc = document.getElementById("encryption");
-        var dec = document.getElementById("decryption");
-        var alphabetBoard = Array(Array(5), Array(5), Array(5), Array(5), Array(5));
-        var keyForSet = "";
-        var blankCheck = "";
-        var zCheck = "";
-        var oddFlag = false; 
-        var enc_result = ""; // 암호화 한 결과
+        let key = document.getElementById("key"); // 암호화에 쓰일 키
+        let str = document.getElementById("str"); // 암호화할 문자열
+        let arr = document.getElementById("arr1"); // 암호화할 문자열
+        let enc = document.getElementById("encryption");
+        let dec = document.getElementById("decryption");
+        let alphabetBoard = Array(Array(5), Array(5), Array(5), Array(5), Array(5));
+        let keyForSet = "";
+        let blankCheck = "";
+        let zCheck = "";
+        let oddFlag = false; 
+        let enc_result = ""; // 암호화 한 결과
+        let count =0;
 
         function mirim() {
             setBoard();
             setStr();
             setArr();
             strEncryption(key.value, str.value);
-            strDecryption(key.value, enc_result, zCheck);
             removeElements();
+        }
+        function bokho(){
+            strDecryption(key.value, enc_result, zCheck);
         }
 
 
@@ -59,13 +61,16 @@
             $('.end').css("display", "block");
         }
         function setArr(){
+            
             for(let i=0; i < alphabetBoard.length; i++){
                 
                 for(let j=0; j < alphabetBoard[i].length; j++){
                     arr.innerHTML += alphabetBoard[i][j]+"  ";
                 }
                 arr.innerHTML += "<br>";
+                
             }
+            
         }
 
         // alphabetBoard 배열에 중복없이 넣기
@@ -99,7 +104,7 @@
                 for (let j = 0; j < alphabetBoard[i].length; j++) {
                     alphabetBoard[i][j] = keyForSet.charAt(keyLengthCount++);
                 }
-            }
+            } 
         }
 
         function setStr() {
@@ -116,14 +121,15 @@
         }
 
         function strEncryption(key, str) {
-            var playFair = ""; // 바꾸기 전 쌍자암호를 저장할 곳
-            var encPlayFair = ""; // 바꾼 후 쌍자암호를 저장할 곳
-            var x1 = 0, x2 = 0, y1 = 0, y2 = 0; // 두 글자의 각각의 행, 열 값
-            var encStr = "";
+            let playFair = ""; // 바꾸기 전 쌍자암호를 저장할 곳
+            let encPlayFair = ""; // 바꾼 후 쌍자암호를 저장할 곳
+            let x1 = 0, x2 = 0, y1 = 0, y2 = 0; // 두 글자의 각각의 행, 열 값 
+            let encStr = "";
 
             for (let i = 0; i < str.length; i+= 2) // arraylist 세팅
             {
-                var tmpArr = new Array(2);                                                                                                                                                                
+                let tmpArr = new Array(2)
+                ;                                                                                                                                                                
                 tmpArr[0] = str.charAt(i);
                 for (let j = 0; j < str.length; j++) {                             
                     if (str.charAt(i) === str.charAt(i + 1)) //글이 반복되면 x추가
@@ -150,7 +156,7 @@
                 oddFlag = true;
             }
             for (let i = 0; i < playFair.length; i+= 2) {
-                var tmpArr = new Array(2);
+                let tmpArr = new Array(2);
                 if(playFair[i] === playFair[i+1]){
                     if(zCheck.charAt(i, 1) === '1'){
                         tmpArr[0] = 'q';
@@ -208,19 +214,19 @@
         }
 
         function strDecryption(key, str, zChk) {
-            var playFair = new Array(); // 바꾸기 전 쌍자암호를 저장할 곳
-            var decPlayFair = new Array(); // 바꾼 후 쌍자암호를 저장할 곳
-            var x1 = 0, x2 = 0, y1 = 0, y2 = 0; // 두 글자의 각각의 행, 열 값
-            var decStr = "";
+            let playFair = new Array(); // 바꾸기 전 쌍자암호를 저장할 곳
+            let decPlayFair = new Array(); // 바꾼 후 쌍자암호를 저장할 곳
+            let x1 = 0, x2 = 0, y1 = 0, y2 = 0; // 두 글자의 각각의 행, 열 값
+            let decStr = " ";
 
             for (let i = 0; i < str.length; i += 2) {
                 var tmpArr = new Array();
-                tmpArr[0] = str.charAt(i);
-                tmpArr[1] = str.charAt(i + 1);
+                tmpArr[0] = str.charAt(i + "\t ");
+                tmpArr[1] = str.charAt(i + 1 + "\t ");
                 playFair.push(tmpArr);
             }
             for (let i = 0; i < playFair.length; i++) {
-                var tmpArr = new Array();
+                let tmpArr = new Array();
                 for (let j = 0; j < alphabetBoard.length; j++) //쌍자암호의 각각 위치체크
                 {
                     for (let k = 0; k < alphabetBoard[j].length; k++) {
